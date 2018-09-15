@@ -33,8 +33,6 @@ module Watir
         Watir.logger.output = 'test.log'
         Watir.logger.warn('message')
         expect(File.read('test.log')).to include('WARN Watir message')
-      ensure
-        File.delete('test.log')
       end
     end
 
