@@ -28,13 +28,15 @@ module Watir
       expect { Watir.logger.warn('message') }.to output(/WARN Watir message/).to_stdout_from_any_process
     end
 
-    it 'allows to output to file' do
-      begin
-        Watir.logger.output = 'test.log'
-        Watir.logger.warn('message')
-        expect(File.read('test.log')).to include('WARN Watir message')
-      ensure
-        File.delete('test.log')
+    not_compliant_on :appveyor do
+      it 'allows to output to file' do
+        begin
+          Watir.logger.output = 'test.log'
+          Watir.logger.warn('message')
+          expect(File.read('test.log')).to include('WARN Watir message')
+        ensure
+          File.delete('test.log')
+        end
       end
     end
 

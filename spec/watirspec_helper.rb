@@ -82,6 +82,7 @@ class LocalConfig
     matching_guards << [browser, Selenium::WebDriver::Platform.os]
     matching_guards << :relaxed_locate if Watir.relaxed_locate?
     matching_guards << :not_relaxed_locate unless Watir.relaxed_locate?
+    matching_guards << :appveyor if ENV['APPVEYOR']
     matching_guards << :headless if @imp.browser_args.last[:headless]
 
     if !Selenium::WebDriver::Platform.linux? || ENV['DESKTOP_SESSION']
